@@ -1,9 +1,20 @@
 \BOOKMARK [1][-]{section.1}{Introduction}{}% 1
 \BOOKMARK [1][-]{section.2}{Related Work}{}% 2
-\BOOKMARK [1][-]{section.3}{Threat Model}{}% 3
-\BOOKMARK [1][-]{section.4}{Method}{}% 4
-\BOOKMARK [1][-]{section.5}{Results}{}% 5
-\BOOKMARK [1][-]{section.6}{Discussion}{}% 6
-\BOOKMARK [1][-]{section.7}{Limitations}{}% 7
-\BOOKMARK [1][-]{section.8}{Conclusion}{}% 8
-\BOOKMARK [1][-]{section*.1}{References}{}% 9
+\BOOKMARK [2][-]{subsection.2.1}{Untrusted content and instruction hierarchy}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Context volume as a pressure}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.3}{Drift and constraint adherence}{section.2}% 5
+\BOOKMARK [2][-]{subsection.2.4}{Text versus action}{section.2}% 6
+\BOOKMARK [1][-]{section.3}{Threat Model and Harness}{}% 7
+\BOOKMARK [1][-]{section.4}{Method}{}% 8
+\BOOKMARK [2][-]{subsection.4.1}{Probes and scoring}{section.4}% 9
+\BOOKMARK [2][-]{subsection.4.2}{Depth verification}{section.4}% 10
+\BOOKMARK [2][-]{subsection.4.3}{Arms and mechanisms}{section.4}% 11
+\BOOKMARK [1][-]{section.5}{Results}{}% 12
+\BOOKMARK [2][-]{subsection.5.1}{Prohibitions held at depth}{section.5}% 13
+\BOOKMARK [2][-]{subsection.5.2}{Delivery location did not matter}{section.5}% 14
+\BOOKMARK [2][-]{subsection.5.3}{Compaction removes the policy but preserves a paraphrase}{section.5}% 15
+\BOOKMARK [2][-]{subsection.5.4}{Utility fails, and text scoring cannot see it}{section.5}% 16
+\BOOKMARK [1][-]{section.6}{Discussion}{}% 17
+\BOOKMARK [1][-]{section.7}{Validity and Limitations}{}% 18
+\BOOKMARK [1][-]{section.8}{Conclusion}{}% 19
+\BOOKMARK [1][-]{section*.1}{References}{}% 20

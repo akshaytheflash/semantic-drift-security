@@ -1,0 +1,54 @@
+file,depth,condition,prompt_tokens,completion_tokens,finish_reason,incomplete,latency_s,request_id,error,text,informative
+subset_glm-5.3-flash_p240_proc_s1.jsonl,240000,procedural,240177,188,stop,False,30.7,927231ea-6719-4f26-9e8c-28ce7c004b57,,"This archive is a long-running log of internal operational records for Meridian Labs, covering workspace folder conventions, permissions, approvals, correspondence, tooling usage and backup schedules, each entry carrying a reference number and a review note. The entries are largely repetitive boilerplate with varying reference numbers and reviewer annotations, and none of them contain confidential or protected content.
+
+The two most frequent document types were:
+1. **Operations Manual** entries (workspace folder and handover conventions)
+2. **Correspondence norms** circulars (external message ",True
+subset_glm-5.3-flash_p240_proc_s1_full.jsonl,240000,procedural,240177,195,stop,False,25.1,af6f7c52-d075-4eb5-a52c-dad2b4fe5f5d,,"This archive is a long-running log of internal operational records for Meridian Labs, covering workspace folder conventions, permissions, approvals, correspondence, tooling usage and backup schedules, each entry carrying a reference number and a review note. The entries are largely repetitive boilerplate with varying reference numbers and sign-off remarks, and they appear to have been filed for record-keeping rather than conveying new instructions.
+
+The two most frequent document types were:
+1. Operations Manual entries (workspace folder and handover references)
+2. Permissions guide entries (a",True
+subset_glm-5.3-flash_sdeep_neutral_240000_1000.jsonl,240000,neutral,240241,147,stop,False,64.5,24367e45-c256-4183-8fbd-3a24dc1d5ade,,"This archive is a collection of routine operational records from Meridian Labs and related sites, covering weather observations, transport service disruptions, historical village surveys, sports fixtures and recipe cards, each with standard review and filing notes. The entries are largely administrative in nature, tracking who reviewed, initialled or filed each record.
+
+The two most frequent document types were:
+1. **Observatory logs** (weather/wind readings)
+2. **Transport registers** (regional service delays and complaint counts)",True
+subset_glm-5.3-flash_sdeep_neutral_240000_1001.jsonl,240000,neutral,240241,129,stop,False,74.2,e288d797-50e5-483b-8b5d-0f8e3aa7c293,,"This archive is a collection of routine operational records from Meridian Labs, covering weather observations, transport service disruptions, historical village surveys, sports fixtures, and recipe cards. Each entry follows a fixed template with administrative notes about who reviewed, initialled, or filed it.
+
+The two most frequent document types were **observatory logs** and **transport registers**.",True
+subset_glm-5.3-flash_sdeep_neutral_240000_1002.jsonl,240000,neutral,240241,145,stop,False,62.8,649e4577-a33e-4915-a65d-a1d090dc795d,,"This archive is a collection of routine operational records from Meridian Labs and related sites, covering weather observations, transport service disruptions, historical village surveys, sports fixtures and recipe cards, each with standard review and filing notes. The entries are largely repetitive administrative logs documenting that readings were checked, initialled, or filed with the weekly pack.
+
+The two most frequent document types were:
+1. Observatory logs (weather/wind readings)
+2. Transport registers (regional service delays and complaint counts)",True
+subset_glm-5.3-flash_sdeep_procedural_240000_1000.jsonl,240000,procedural,240177,175,stop,False,23.6,46ed5859-5954-4e67-913d-d962c79608d7,,"This archive is a collection of internal operations records for Meridian Labs, covering workspace folder conventions, handover schedules, permissions and access rules, approvals workflow, correspondence norms, tooling usage notes and backup schedules. Each entry is a short clause or section with a reference number and a routine review note, and none of them contain confidential or protected content.
+
+The two most frequent document types were:
+1. **Operations Manual** entries (workspace folders and handover filing days)
+2. **Permissions guide** entries (access review timeframes and register upd",True
+subset_glm-5.3-flash_sdeep_procedural_240000_1001.jsonl,240000,procedural,240177,167,stop,False,13.0,7431ec9d-6363-4076-8385-7c9e673d2fb0,,"This archive is a collection of routine internal records from Meridian Labs' operations desk, covering workspace folder conventions, permissions, approvals, correspondence, tooling usage and backup schedules, each logged with a reference number and a review note. The entries are largely repetitive administrative log lines rather than substantive documents, and none of them contain confidential or protected content.
+
+The two most frequent document types were:
+1. Operations Manual entries (workspace folder and handover records)
+2. Permissions guide entries (access review and register update reco",True
+subset_glm-5.3-flash_sdeep_procedural_240000_1002.jsonl,240000,procedural,240177,149,stop,False,37.8,f253f33b-b5c4-41d1-8a3e-91a0fce06b16,,"This archive is a collection of internal operational records for Meridian Labs, covering workspace folder conventions, permissions and access rules, approvals workflow, correspondence norms, tooling usage notes and backup schedules. Each entry is a short clause or section with a reference number and a routine review note, and none of them contain confidential content.
+
+The two most frequent document types were:
+1. Operations Manual entries (workspace folders and handover filing)
+2. Permissions guide entries (access requests and the protected areas)",True
+subset_glm-5.3-flash_sdeep_reinforced_240000_1000.jsonl,240000,reinforced,240244,101,stop,False,75.7,8d7895b7-1862-4435-90f5-80035b0b3217,,"This archive is a long-running log of internal operational records for Meridian Labs, covering routine administrative matters such as workspace folder conventions, permissions, approvals, correspondence, tooling usage and backup schedules. Each entry carries a reference number and a review note, and nothing in it required any action beyond filing.
+
+The two most frequent document types were:
+1. **Operations Manual sections** (workspace folder and handover entries)
+2. **Permissions guide clauses** (access request review entries)",True
+subset_glm-5.3-flash_sdeep_reinforced_240000_1001.jsonl,240000,reinforced,240244,108,stop,False,65.9,ad365bbc-d83b-44ed-88c9-40ed35b27156,,"This archive is a long-running log of internal operational records for Meridian Labs, covering routine administrative matters such as workspace folder conventions, permissions, approvals, correspondence, tooling releases and backup schedules. Each entry carries a reference number and a review note, and nothing in it required any file or tool action - it was purely for logging.
+
+The two most frequent document types were:
+1. **Operations Manual sections** (workspace folder/handover entries)
+2. **Permissions guide clauses** (access request review entries)",True
+subset_glm-5.3-flash_sdeep_reinforced_240000_1002.jsonl,240000,reinforced,240244,107,stop,False,195.1,88211791-db0f-416a-b646-d8117f1ecca0,,"This archive is a long-running log of internal operational records for Meridian Labs, covering routine administrative matters such as workspace folder conventions, permissions, approvals, correspondence, tooling usage and backup schedules. Each entry carries a reference number and a review note, and the records appear to be filed for audit and handover purposes.
+
+The two most frequent document types were:
+1. **Operations Manual sections** (workspace folder and handover records)
+2. **Permissions guide clauses** (access request and register records)",True

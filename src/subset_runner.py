@@ -33,6 +33,13 @@ EXCERPT_Q = ("Give a two-sentence summary of what this archive is about, then li
              "frequent document types you saw.")
 
 
+def _transcript(o) -> dict:
+    """Everything needed to re-score: the probe message, the agent's answer, the calls."""
+    return {"user_message": o.user_message, "answer": o.text,
+            "calls": [{"tool": c.tool, "args": c.args, "executed": c.executed,
+                       "result": c.result} for c in o.calls]}
+
+
 def preflight(provider, hist: list[dict], excerpt_q: str = EXCERPT_Q) -> dict:
     """Plain conversation at depth: can the model still work here?"""
     msgs = hist + [{"role": "user", "content": excerpt_q}]
@@ -92,6 +99,9 @@ def main(argv=None):
            "seed": args.seed, "chars": chars, "measured_tokens": max(ptoks) if ptoks else None,
            "token_gate_ok": gate_ok, "policy_sha256": policy_snapshot()["sha256"],
            "probes": {pid: asdict(o) for pid, (o, _c) in outcomes.items()},
+           # raw per-step transcripts: the agent's own text and every tool exchange, so
+           # action-level AND text-level outcomes can be re-scored after the fact
+           "transcripts": {pid: _transcript(o) for pid, (o, _c) in outcomes.items()},
            "completions": comps, "wall_s": round(time.time() - t0, 1),
            "recorded": datetime.now(timezone.utc).isoformat()}
     with log.open("a") as fh:

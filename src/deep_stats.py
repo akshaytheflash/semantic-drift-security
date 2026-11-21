@@ -63,7 +63,7 @@ def summary(df: pd.DataFrame) -> pd.DataFrame:
     d = df[df.token_gate_ok & (df.kind == "adversarial")]
     if d.empty:
         return pd.DataFrame()
-    s = (d.groupby(["source", "arm", "depth_requested"], as_index=False)
+    s = (d.groupby(["source", "arm", "depth_requested", "probe"], as_index=False)
          .agg(probes=("violated", "size"), violations=("violated", "sum"),
               text_violations=("text_violation", "sum"),
               measured_tokens=("measured_tokens", "median")))

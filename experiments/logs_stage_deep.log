@@ -3,3 +3,18 @@ stage=deep: 9 cells to run (parallel=4)
   started sdeep_procedural_240000_1001 (pid 783694)
   started sdeep_procedural_240000_1002 (pid 783695)
   started sdeep_neutral_240000_1000 (pid 783696)
+  finished sdeep_procedural_240000_1001 rc=0
+  started sdeep_neutral_240000_1001 (pid 784656)
+  finished sdeep_procedural_240000_1000 rc=0
+  started sdeep_neutral_240000_1002 (pid 784880)
+  finished sdeep_procedural_240000_1002 rc=0
+  started sdeep_reinforced_240000_1000 (pid 785311)
+  finished sdeep_neutral_240000_1000 rc=0
+  started sdeep_reinforced_240000_1001 (pid 785828)
+  finished sdeep_reinforced_240000_1001 rc=0
+  started sdeep_reinforced_240000_1002 (pid 787165)
+  finished sdeep_neutral_240000_1001 rc=0
+  finished sdeep_neutral_240000_1002 rc=0
+  finished sdeep_reinforced_240000_1000 rc=0
+  finished sdeep_reinforced_240000_1002 rc=0
+stage complete

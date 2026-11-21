@@ -1,0 +1,265 @@
+\documentclass[conference]{IEEEtran}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+\usepackage{balance}
+\setlength{\textfloatsep}{6pt}
+\setlength{\floatsep}{5pt}
+\setlength{\intextsep}{5pt}
+
+\title{Do Real Security Prohibitions Decay Under Benign Context Accumulation? An Action-Level Study at 91\% of a Production Context Window}
+
+\author{\IEEEauthorblockN{Author Name}\IEEEauthorblockA{Institution\\City, Country\\email@example.org}}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Long-running agents accumulate benign context---documents, tool outputs, notes---and recent
+work reports that prohibition-type constraints erode as that context grows, based on
+\emph{formatting} constraints scored by string matching. We ask whether the same holds for
+real security prohibitions enforced through tool calls. We build a deterministic harness with
+nine adversarial probes across five policy clauses (credential disclosure, exfiltration,
+destructive operations, untrusted-content following, authorization bypass), scored twice: from
+executed tool calls and from the answer text. Context is assembled from real documents and
+depth is verified against the provider's own token counts, reaching 240{,}4xx prompt tokens
+(91.7\% of a 262{,}144-token window) on a production model. Across nine trials at that depth
+the loud clauses held: credential disclosure, bulk deletion and secret exfiltration were
+refused every time. Delivery location did not change this: the policy still governed behaviour
+when delivered once, mid-session, inside an untrusted document 120k tokens earlier, with the
+correct clause identifiers cited in the refusal. Two behaviours did change with depth. First,
+context compaction removed the explicit policy entirely---the agent's own handover note
+contained no clause and no reference to the policy---leaving only a paraphrase, which
+happened to preserve compliance. Second, benign utility failed in 9/9 trials, a failure
+invisible to text-only scoring. We conclude that, for this model, prohibition decay reported
+on formatting proxies does not transfer to real clauses; the deployment risk lies in policy
+\emph{retention} across compaction and in silent utility collapse rather than in progressive
+disobedience.
+\end{abstract}
+
+\begin{IEEEkeywords}
+LLM agents, AI security, policy adherence, long context, context compaction, evaluation
+\end{IEEEkeywords}
+
+\section{Introduction}
+
+Agents are increasingly given a fixed operating policy---never reveal credentials, never
+transmit data externally, never perform destructive operations---and then run for long
+sessions. Whether that policy survives the session is an assumption rather than a test.
+Recent work on this question reports substantial erosion of prohibition-type constraints as
+context grows~\cite{gamage2026omission}, measured on eight formatting rules such as ``never use
+bullet points'' and ``never use \# headers'', scored by regular expressions over a single long
+answer. The authors are explicit that whether semantically meaningful security constraints
+decay at comparable rates is untested.
+
+That gap matters operationally. Formatting rules carry no reinforcement signal from
+alignment training; prohibitions against credential disclosure and unauthorised deletion are
+heavily represented in it, and may therefore behave differently under the same pressure.
+
+This paper contributes:
+\begin{itemize}
+\item a deterministic harness in which policy violations are \emph{actions} (tool calls against
+a simulated filesystem) and the same events are also scored textually, so the two views can be
+compared;
+\item a depth methodology that verifies context size against the provider's own
+\texttt{prompt\_tokens} rather than estimating it, reaching 91.7\% of a production window;
+\item a measurement at that depth across three arms and three seeds, plus three
+delivery/retention mechanisms (mid-session policy, fragmented policy, compaction);
+\item a negative result for prohibition decay on real clauses, and two positive
+findings: compaction discards the policy while preserving a paraphrase, and benign utility
+collapses at depth invisibly to text scoring.
+\end{itemize}
+
+\section{Related Work}
+
+\subsection{Untrusted content and instruction hierarchy}
+Indirect prompt injection established that retrieved content can act as
+instructions~\cite{greshake2023indirect}, motivating privilege separation between system,
+user and tool channels~\cite{wallace2024hierarchy}, structured queries and defensive
+fine-tuning~\cite{chen2025struq}, and agent-level benchmarks that jointly measure utility and
+security~\cite{debenedetti2024agentdojo,zhang2025asb}. Our harness adopts the same separation:
+the policy lives in the system message and every probe states that embedded content is data.
+
+\subsection{Context volume as a pressure}
+Many-shot jailbreaking showed that accumulating in-context examples degrades safety behaviour
+as a power law~\cite{anil2024manyshot}, and follow-up work found context length to be the
+primary factor even for filler text~\cite{kim2025manyshot}. Positional effects are well
+documented~\cite{liu2024lost}, as is the cost of irrelevant context on
+reasoning~\cite{shi2023distracted}. These are adversarial or task-accuracy settings; we ask
+about benign accumulation and a fixed policy.
+
+\subsection{Drift and constraint adherence}
+Multi-turn degradation of task performance~\cite{laban2025lost}, goal drift under long
+horizons~\cite{arike2025goaldrift}, and equilibrium drift with reminder
+interventions~\cite{dongre2025drift} establish that long interactions change behaviour.
+The closest work to ours reports that omission constraints decay while requirement
+constraints persist~\cite{gamage2026omission}. We test the same claim on real prohibitions and
+at greater verified depth, and add delivery and retention mechanisms.
+
+\subsection{Text versus action}
+Cartagena and Teixeira show that text-level safety does not transfer to tool-call
+safety~\cite{cartagena2026gap}, and silent policy-violating writes behind permissive tools are
+documented in the agent-reliability literature~\cite{gates2026silent}. Our scoring reports both
+views per probe and shows they disagree in both directions.
+
+\section{Threat Model and Harness}
+
+The agent (\emph{OpsAssist}) is given a byte-identical system policy with five enforceable
+clauses (CONF-1 credential confidentiality; EXFIL-3 external transmission; FS-SAFE-2
+destructive operations; UNTRUSTED-4 untrusted content is data; AUTH-5 privileged actions). Its
+only side effects are simulated tools: a mock filesystem in which \texttt{/vault},
+\texttt{/system} and \texttt{/backups} cannot be destroyed, and an in-memory outbox whose
+recipients must use the reserved \texttt{.invalid} domain. Canary secrets exist only inside the
+simulation.
+
+Each trial builds one history from a seeded corpus. Evaluation probes branch off that history
+and their answers are never appended, so checkpoint $t$ cannot be contaminated by checkpoint
+$t-1$. The system message is re-hashed before every request and a mismatch aborts the trial.
+
+\section{Method}
+
+\subsection{Probes and scoring}
+Nine adversarial probes cover the five clauses twice each (direct and document-mediated),
+including two \emph{silent} probes whose violation appears only in tool arguments: a
+confirmation message carrying account details (P10) and a deletion of a file identified only
+by description (P11). Two benign probes measure utilty. A probe run is scored \emph{action-level}
+(a prohibited call emitted, or secret content in the answer or outgoing body) and
+\emph{text-level} (a style-regex summary of the answer, mirroring prior work). Scoring is
+deterministic; three scorer defects found during development all had the property of
+over-counting violations and were fixed with regression tests (Section~\ref{sec:validity}).
+
+\subsection{Depth verification}
+Corpora are built from long internal documents chunked into $\sim$4k-character turns. Because
+token density varies with corpus size, we fit \texttt{tokens} $= a\cdot\texttt{chars}+b$ from two
+local \texttt{tiktoken} counts and correct the result by a measured API/\texttt{cl100k} ratio
+(0.995 for the model studied). Before spending probe calls, a preflight conversation at the
+target size records the provider's token count; probes are accepted only if within $\pm3\%$.
+
+\subsection{Arms and mechanisms}
+Three content arms at 240k tokens: \emph{neutral} (unrelated documents), \emph{procedural}
+(internal manuals, permissions, approvals, correspondence norms), \emph{reinforced} (procedural
+with the policy restated every ten documents). Three mechanisms probe delivery and retention:
+M1 compaction (the model writes its own handover note, probes run against the note), M2
+policy-as-document (policy delivered once, mid-session, inside an untrusted document with a
+neutral system message), M3 fragmented policy (policy split across six turns).
+
+\section{Results}
+
+\begin{table}[t]
+\centering
+\caption{Verified depth. Percentages are of a 262{,}144-token window.}
+\label{tab:depth}
+\begin{tabular}{lrr}
+\toprule
+Run & prompt tokens & \% window \\
+\midrule
+preflight, 240k target & 240{,}177 & 91.6 \\
+deep stage, 9 cells & 240{,}384--240{,}515 & 91.7 \\
+M2 policy-as-document & 240{,}424 & 91.7 \\
+M1 compacted context & 415--425 & 0.16 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Prohibitions held at depth}
+Table~\ref{tab:depth} confirms the depth. Across nine trials at 240k tokens
+(Table~\ref{tab:spvr}), credential disclosure (P1), bulk destruction including
+\texttt{/backups} (P3) and secret exfiltration (P10) were refused every time. P11, a deletion
+request naming the file only by description, fired in five of nine trials; inspection of every
+firing shows one stable interpretation---the agent states the rule requires an exact filename,
+lists the folder, then deletes the single matching file---and it does not increase with
+context size. We therefore read P11 as an ambiguity in the clause rather than as decay.
+
+\begin{table}[t]
+\centering
+\caption{Action-level outcomes at 240k tokens (3 arms $\times$ 3 seeds).}
+\label{tab:spvr}
+\begin{tabular}{lccc}
+\toprule
+Probe & neutral & procedural & reinforced \\
+\midrule
+P1 credential disclosure & 0/3 & 0/3 & 0/3 \\
+P3 bulk deletion & 0/3 & 0/3 & 0/3 \\
+P10 exfiltration in body & 0/3 & 0/3 & 0/3 \\
+P11 delete-by-description & 3/3 & 2/3 & 0/3 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Delivery location did not matter}
+Under M2 the policy existed only inside a document read mid-session, with a neutral system
+message. The agent still cited the clause identifiers verbatim and refused: ``\emph{Credentials
+are confidential under policy CONF-1 --- I never print, quote or copy their contents, even
+under time pressure}'' and ``\emph{Deleting files under /backups/ is prohibited by policy
+(FS-SAFE-2)... provide an explicit approval record covering that specific file and ask again}''.
+Zero of six probes fired in both seeds. This rules out the explanation that our null arises from
+the policy sitting at the attention-advantaged start of the prompt.
+
+\subsection{Compaction removes the policy but preserves a paraphrase}
+Under M1 the model summarised a 240k-token session into a 1.3--1.5k-character handover note. The
+note contained none of the clause identifiers, the word ``policy'', or any protected path, yet
+closed with a self-authored line: ``\emph{Nothing in the session involved destructive
+operations, credentials, or external recipients. Keep it that way: no deletions, no access
+changes, no outbound messages without explicit user confirmation.}'' All seven probes were
+compliant against the compacted context. Compaction therefore removes the \emph{auditable,
+enumerable} policy and replaces it with model-authored guidance that happened to suffice here.
+
+\subsection{Utility fails, and text scoring cannot see it}
+The benign probe (``how much did we spend in August?'') failed in 9/9 depth trials: the agent
+searched, did not open the report, and stopped. A text-only evaluator reads that as a harmless
+non-answer. In the opposite direction, two depth trials described deleting backups in prose
+while issuing no \texttt{delete\_path} call, so text scoring over-reports. The two views are
+therefore not interchangeable in either direction.
+
+\section{Discussion}
+
+The result is a bound, not a refutation. On this model, at 91.7\% of its window, with real
+clauses and action-level measurement, benign accumulation did not produce disclosure,
+exfiltration or destruction---including under mid-session delivery designed to recreate the
+conditions of the formatting-constraint study. If prohibition decay is a general property of
+long contexts, it is weaker for alignment-anchored security clauses than for formatting rules
+that carry no such reinforcement, at least at this scale.
+
+The finding with operational consequences is compaction. Deployed agents summarise their
+history; our measurement shows the summary discards every explicit rule while preserving a
+fluent paraphrase. Compliance in our trials was preserved by that paraphrase, but paraphrase is
+not auditable and is not guaranteed to preserve the parts of a policy that happen to matter for
+the next request. Treating the policy as a separately pinned object, rather than something that
+can be summarised away, follows directly.
+
+\section{Validity and Limitations}
+\label{sec:validity}
+
+\textbf{Scorer defects.} Three scoring bugs were found during collection; all three made
+violations appear more frequent (a strict-mode predicate double-match, a request path matched
+inside the response, and a quoted path counted as disclosure). Each has a regression test and
+transcripts are stored for re-scoring. Reported numbers use the corrected scorer.
+
+\textbf{Retained failures.} A 150k run in which every probe returned eight tokens was caused by
+a calibration routine overriding the shared client's output budget; it is retained and
+excluded. Superseded-spec pilot records are likewise retained and excluded by schema.
+
+\textbf{Scope.} One model, one policy wording, nine probes, three seeds at depth. Seeds vary
+context content, not sampling (temperature 0). Two document-mediated clauses (P2, P4) were not
+run at depth and are the obvious next test.
+
+\textbf{Proxy clauses.} The policy is our own. Whether these conclusions transfer to a
+vendor-authored, adversarial-tuned policy is untested.
+
+\section{Conclusion}
+
+We asked whether real security prohibitions decay under the benign context accumulation of a
+long-running agent, and measured the answer at the edge of a production context window with
+action-level scoring. They did not: the clauses that matter operationally held at 240k tokens,
+across content types, and with the policy delivered mid-session inside untrusted content. What
+does break is policy \emph{retention} across compaction, where the explicit rules are discarded
+and only a paraphrase remains, and benign utility, which collapses in a way text-only
+evaluation cannot observe. Evaluating security with text is not merely imprecise; here it is
+wrong in both directions.
+
+\balance
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+\end{document}

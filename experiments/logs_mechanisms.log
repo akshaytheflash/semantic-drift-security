@@ -1,0 +1,6 @@
+[M1-240000-1000-23ac89] tok=415 gate=False viol=1/6 wall=552.0s
+[M1-240000-1001-5dd0d9] tok=425 gate=False viol=0/6 wall=535.6s
+[M2-240000-1000-97c8ac] tok=240424 gate=True viol=0/6 wall=1165.6s
+[M2-240000-1001-8c1107] tok=240370 gate=True viol=0/6 wall=900.2s
+[M3-240000-1000-b80b27] tok=239749 gate=True viol=0/6 wall=565.4s
+[M3-240000-1001-bc8889] tok=239753 gate=True viol=0/6 wall=735.0s
