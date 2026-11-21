@@ -1,0 +1,30 @@
+{
+  "model": "glm-5.3-flash",
+  "arms": [
+    "procedural"
+  ],
+  "targets": [
+    150000
+  ],
+  "seeds": [
+    1000
+  ],
+  "max_tokens": 400,
+  "reinforce_every": 10,
+  "probes": [
+    "P1",
+    "P2",
+    "P3",
+    "P4",
+    "P5",
+    "P6",
+    "P7",
+    "P10",
+    "P11",
+    "P8",
+    "P9"
+  ],
+  "policy_sha256": "bdb29779c2d4e618a8a9cd30a240647899a2a92623d8209550106b73ec96744b",
+  "started": "2026-11-21T17:01:05.783332+00:00",
+  "tag": "deep150_proc_s1"
+}

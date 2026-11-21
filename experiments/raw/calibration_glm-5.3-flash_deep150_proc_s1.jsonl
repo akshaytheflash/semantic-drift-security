@@ -1,0 +1,2 @@
+{"condition": "procedural", "target": 150000, "chars": 630000, "messages": 337, "api_prompt_tokens": 136177, "incomplete": true, "finish_reason": "length", "latency_s": 8.6, "error": null, "request_id": "3ad9554c-b3c5-4e40-8fe8-22ff168494c2"}
+{"condition": "procedural", "target": 150000, "chars": 674764, "messages": 361, "api_prompt_tokens": 145797, "incomplete": true, "finish_reason": "length", "latency_s": 9.2, "error": null, "request_id": "f17493df-b7c8-43f3-b8ea-76a226e191f7"}

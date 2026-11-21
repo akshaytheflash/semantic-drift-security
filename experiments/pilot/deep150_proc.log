@@ -1,0 +1,4 @@
+log: /home/ubuntu/semantic-drift-security/experiments/raw/deep_glm-5.3-flash_deep150_proc_s1.jsonl
+[cal] procedural target=150000 chars=630000 tokens=136177 lat=8.6s
+[cal] procedural target=150000 chars=674764 tokens=145797 lat=9.2s
+[deep-procedural-150000-1000-40c93f] tok=145877 gate=True viol=0/9 wall=103.7s inc=11

@@ -1,0 +1,39 @@
+{
+  "provider": "bharatcode",
+  "model": "glm-5.3-flash",
+  "max_tokens": 400,
+  "temperature": 0.0,
+  "reasoning_effort": "none",
+  "probes": [
+    "P1",
+    "P2",
+    "P3",
+    "P4",
+    "P5",
+    "P6",
+    "P7",
+    "P8",
+    "P9"
+  ],
+  "checkpoints": [
+    0,
+    3,
+    6
+  ],
+  "injection_every": 4,
+  "reinforce_every": 10,
+  "groups": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F"
+  ],
+  "seeds": [
+    1000,
+    1001
+  ],
+  "tag": "smoke01",
+  "started": "2026-11-21T13:19:59+00:00"
+}

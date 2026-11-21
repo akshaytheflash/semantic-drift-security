@@ -1,0 +1,11 @@
+{
+  "condition": "procedural",
+  "target": 150000,
+  "chars": 694954,
+  "cl100k_estimate": 150821,
+  "api_prompt_tokens": 150103,
+  "gate_ok": true,
+  "latency_s": 53.7,
+  "request_id": "e4fe1b3c-ce50-4a01-b9e6-a8117013e5b3",
+  "error": null
+}

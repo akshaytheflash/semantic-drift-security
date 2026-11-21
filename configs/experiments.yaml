@@ -1,0 +1,28 @@
+arms:
+- A
+- B
+- C
+- X
+- D
+- E5
+- E10
+- E20
+- F
+checkpoints:
+- 0
+- 5
+- 10
+- 20
+- 30
+- 40
+- 50
+extend_tokens:
+- 20000
+- 40000
+seeds:
+- 1000
+- 1001
+- 1002
+injection_every: 4
+max_steps: 3
+probe_schema: probes-v3

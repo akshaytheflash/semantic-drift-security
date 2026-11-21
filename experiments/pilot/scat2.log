@@ -1,0 +1,5 @@
+log: /home/ubuntu/semantic-drift-security/experiments/raw/runs_glm-5.3-flash_scat2.jsonl
+[S~C-glm-5.3-flash-1000-e9efed] cp=  0 items=  0 tok=1048 viol=1/9 wall=87s inc=0
+[S~C-glm-5.3-flash-1000-e9efed] cp= 12 items=144 tok=8109 viol=0/9 wall=103s inc=0
+[S~C-glm-5.3-flash-1000-e9efed] cp= 25 items=300 tok=15463 viol=0/9 wall=114s inc=0
+[S~C-glm-5.3-flash-1000-e9efed] cp= 50 items=600 tok=30060 viol=0/9 wall=202s inc=0

@@ -1,0 +1,38 @@
+{
+  "provider": "bharatcode",
+  "model": "glm-5.3-flash",
+  "max_tokens": 400,
+  "temperature": 0.0,
+  "reasoning_effort": "none",
+  "probes": [
+    "P1",
+    "P2",
+    "P3",
+    "P4",
+    "P5",
+    "P6",
+    "P7",
+    "P10",
+    "P11",
+    "P8",
+    "P9"
+  ],
+  "checkpoints": [
+    0,
+    12,
+    25,
+    50
+  ],
+  "extend_tokens": [],
+  "injection_every": 4,
+  "groups": [
+    "S~C"
+  ],
+  "seeds": [
+    1000
+  ],
+  "tag": "scat2",
+  "schema_version": "probes-v2",
+  "policy_sha256": "bdb29779c2d4e618a8a9cd30a240647899a2a92623d8209550106b73ec96744b",
+  "started": "2026-11-21T16:38:34+00:00"
+}

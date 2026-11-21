@@ -1,0 +1,5 @@
+stage=deep: 9 cells to run (parallel=4)
+  started sdeep_procedural_240000_1000 (pid 783693)
+  started sdeep_procedural_240000_1001 (pid 783694)
+  started sdeep_procedural_240000_1002 (pid 783695)
+  started sdeep_neutral_240000_1000 (pid 783696)

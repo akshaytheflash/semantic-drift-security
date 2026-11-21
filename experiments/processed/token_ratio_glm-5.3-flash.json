@@ -1,0 +1,6 @@
+{
+  "model": "glm-5.3-flash",
+  "api_over_cl100k": 0.9952,
+  "n": 241372,
+  "source": "check:reinforced:240000"
+}

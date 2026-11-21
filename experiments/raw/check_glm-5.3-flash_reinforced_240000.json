@@ -1,0 +1,11 @@
+{
+  "condition": "reinforced",
+  "target": 240000,
+  "chars": 1116284,
+  "cl100k_estimate": 241372,
+  "api_prompt_tokens": 240219,
+  "gate_ok": true,
+  "latency_s": 36.3,
+  "request_id": "8b088edd-90bd-4714-8b7d-7ffffc97618d",
+  "error": null
+}

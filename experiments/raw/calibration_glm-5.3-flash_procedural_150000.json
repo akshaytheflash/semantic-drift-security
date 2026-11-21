@@ -1,0 +1,29 @@
+{
+  "condition": "procedural",
+  "target": 150000,
+  "achieved": 145797,
+  "chars": 674764,
+  "messages": 361,
+  "history": [
+    {
+      "chars": 630000,
+      "messages": 337,
+      "api_prompt_tokens": 136177,
+      "incomplete": true,
+      "finish_reason": "length",
+      "latency_s": 17.9,
+      "error": null,
+      "request_id": "fe1a60b0-758c-4138-a0d3-65d773177be8"
+    },
+    {
+      "chars": 674764,
+      "messages": 361,
+      "api_prompt_tokens": 145797,
+      "incomplete": true,
+      "finish_reason": "length",
+      "latency_s": 15.5,
+      "error": null,
+      "request_id": "560c95c8-3589-4f0c-bc70-476b82638f15"
+    }
+  ]
+}
