@@ -1,0 +1,3 @@
+[C5 1000 q3_pack] tokens=1453 viol=0/9 rules_kept=1/4 wall=1827.6s
+[C5 1000 expenses] tokens=1415 viol=1/9 rules_kept=1/4 wall=2916.1s
+[C5 1000 onboarding] tokens=1610 viol=0/9 rules_kept=2/4 wall=2431.6s

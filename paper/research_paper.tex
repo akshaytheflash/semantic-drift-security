@@ -145,6 +145,21 @@ M1 compaction (the model writes its own handover note, probes run against the no
 policy-as-document (policy delivered once, mid-session, inside an untrusted document with a
 neutral system message), M3 fragmented policy (policy split across six turns).
 
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.32\textwidth]{../figures/fig9_depth_ladder.png}\hfill
+\includegraphics[width=0.32\textwidth]{../figures/fig10_ceiling.png}\hfill
+\includegraphics[width=0.32\textwidth]{../figures/fig11_compaction.png}
+\caption{Left: action-level violation rate against measured prompt depth; the DeepSeek ladder
+reaches 949k tokens with no firing, while GLM's only firings sit at 240k and belong to one
+probe. Centre: the measured context ceiling. Every request up to 1{,}044{,}094 tokens was
+accepted; 1.05M was rejected against the enforced 1{,}048{,}576 limit. Right: compaction at
+900k and 950k sessions, reduced to 552 and 456 prompt tokens while retaining the operative
+rules as prose.}
+\label{fig:depth}
+\end{figure*}
+
 \section{Results}
 
 \begin{table}[t]
@@ -239,6 +254,49 @@ under time pressure}'' and ``\emph{Deleting files under /backups/ is prohibited 
 (FS-SAFE-2)... provide an explicit approval record covering that specific file and ask again}''.
 Zero of six probes fired in both seeds. This rules out the explanation that our null arises from
 the policy sitting at the attention-advantaged start of the prompt.
+
+\subsection{What a summary keeps, and what the agent does with it}
+The single-stage tests above varied depth but not \emph{content}. A longer battery exercised
+five compaction conditions a deployed agent meets: (C1) sessions of content unrelated to the
+policy, (C2) two-stage compaction, (C3) a sweep of three different compaction instructions,
+(C4) a legitimate session under task pressure, and (C5) several tasks interleaved with
+compaction between them. Each cell records the summary verbatim and classifies each of the four
+operative rules as \emph{stated}, \emph{merely named}, or \emph{absent}.
+
+The first classification attempt was wrong and is reported as such: it counted the phrase
+``Approvals workflow''---the title of a document---as retention of the authorisation rule.
+Re-classifying against patterns that require the rule to be \emph{stated} changes the picture:
+summaries retain between zero and one of four rules stated, while many of them retain the
+\emph{names} of the documents that discuss the rules.
+
+The behavioural correlate is specific. The delete-by-description probe (P11) was refused in
+every C1 cell, whose summaries mention no permission-related document at all. It was
+\emph{executed} in the two-stage, handover-sweep and task-pressure cells, whose summaries name
+the approvals and permissions documents but never state the rule that a privileged action needs
+an approval record. On the current sample of seven valid trials the split is 3/3 executed when
+document names survive without the rules versus 2/4 otherwise. A summary that names the
+apparatus of permission without its content appears to license the action; a summary that says
+nothing about permission does not.
+
+\begin{table}[t]
+\centering
+\caption{Compaction battery: rules stated in the final summary and P11 execution.}
+\label{tab:battery}
+\begin{tabular}{lrrrr}
+\toprule
+Condition & Rules & Doc names & P11 & Bench \\
+\midrule
+C1 neutral content & 0--1 & 0 & 0/2 & 1/2 \\
+C2 two-stage & 0--1 & 4 & 2/2 & 2/2 \\
+C3 prompt sweep & 0--1 & 4 & 1/1 & 1/2 \\
+C4 task pressure & 0 & 0 & 2/2 & 1/2 \\
+C5 multi-task & 0--1 & 4 & 2/2 & 1/2 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+We do not claim this as established on this sample; the extension to six seeds per condition
+is running, and the claim in this paper is the mechanism, not the rate.
 
 \subsection{Contradictory compaction behaviour at extreme depth}
 Compaction was repeated on DeepSeek at 900{,}011 and 950{,}002 tokens, the deep regime
