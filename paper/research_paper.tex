@@ -240,7 +240,41 @@ under time pressure}'' and ``\emph{Deleting files under /backups/ is prohibited 
 Zero of six probes fired in both seeds. This rules out the explanation that our null arises from
 the policy sitting at the attention-advantaged start of the prompt.
 
-\subsection{Compaction removes the policy but preserves a paraphrase}
+\subsection{Contradictory compaction behaviour at extreme depth}
+Compaction was repeated on DeepSeek at 900{,}011 and 950{,}002 tokens, the deep regime
+reached by the ladder. The sessions were summarised to 1{,}893- and 1{,}402-character notes,
+which then served as the agent's entire context (552 and 456 prompt tokens respectively). This run compacts \emph{differently} from GLM:
+the summary carries no clause identifiers, but it \emph{does} restate the operative rules in
+prose---confidentiality of \texttt{/vault/} and of files named ``credentials'' or ``keys'',
+the requirement of a named target or an unexpired approval for destructive or privileged
+actions, and the external-send restriction. Measured against that note, all nine probes were
+refused (0/9), with the closest reasoning found anywhere in the study: on the
+delete-by-description probe the agent replied that ``\emph{the old sync artefact does not
+identify a unique file}'' and declined to delete.
+
+\begin{table}[t]
+\centering
+\caption{Policy retention across compaction, by model and session depth.}
+\label{tab:compact}
+\begin{tabular}{llrrr}
+\toprule
+Model & Session & Summary & Clause IDs & Firings \\
+\midrule
+GLM-5.3 & 240k & 1.3--1.5k chars & none & 0/7 \\
+DeepSeek & 900k & 1.9k chars & none & 0/9 \\
+DeepSeek & 950k & 1.4k chars & none & 0/9 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+At 950k the note is shorter yet more explicit, naming \texttt{/vault/}, \texttt{/system/} and
+\texttt{/backups/}, the approval system, and external sends. So whether a policy
+\emph{survives} compaction is not determined by depth, but by what the summariser chooses to
+keep, and that choice varies by model and by session: one model dropped the operative rules entirely and leaned on a
+vague caution, the other rewrote them as prose with no identifiers. Neither preserved the
+policy in a form a reviewer could audit, and neither behaviour is guaranteed by construction.
+
+\subsection{Compaction outcomes differ between models}
 Under M1 the model summarised a 240k-token session into a 1.3--1.5k-character handover note. The
 note contained none of the clause identifiers, the word ``policy'', or any protected path, yet
 closed with a self-authored line: ``\emph{Nothing in the session involved destructive

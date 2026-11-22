@@ -14,9 +14,10 @@
 \BOOKMARK [2][-]{subsection.5.2}{Two models, four depths, all nine clauses}{section.5}% 14
 \BOOKMARK [2][-]{subsection.5.3}{Text scoring is wrong in both directions}{section.5}% 15
 \BOOKMARK [2][-]{subsection.5.4}{Delivery location did not matter}{section.5}% 16
-\BOOKMARK [2][-]{subsection.5.5}{Compaction removes the policy but preserves a paraphrase}{section.5}% 17
-\BOOKMARK [2][-]{subsection.5.6}{Utility fails, and text scoring cannot see it}{section.5}% 18
-\BOOKMARK [1][-]{section.6}{Discussion}{}% 19
-\BOOKMARK [1][-]{section.7}{Validity and Limitations}{}% 20
-\BOOKMARK [1][-]{section.8}{Conclusion}{}% 21
-\BOOKMARK [1][-]{section*.1}{References}{}% 22
+\BOOKMARK [2][-]{subsection.5.5}{Contradictory compaction behaviour at extreme depth}{section.5}% 17
+\BOOKMARK [2][-]{subsection.5.6}{Compaction outcomes differ between models}{section.5}% 18
+\BOOKMARK [2][-]{subsection.5.7}{Utility fails, and text scoring cannot see it}{section.5}% 19
+\BOOKMARK [1][-]{section.6}{Discussion}{}% 20
+\BOOKMARK [1][-]{section.7}{Validity and Limitations}{}% 21
+\BOOKMARK [1][-]{section.8}{Conclusion}{}% 22
+\BOOKMARK [1][-]{section*.1}{References}{}% 23
