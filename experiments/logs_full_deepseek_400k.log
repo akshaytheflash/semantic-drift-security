@@ -1,0 +1,3 @@
+[deepseek-v4.1-flash procedural 400000 1000] tok=399715 gate=True viol=0/9 wall=1634.5s
+[deepseek-v4.1-flash neutral 400000 1000] tok=396750 gate=True viol=0/9 wall=1252.0s
+[deepseek-v4.1-flash reinforced 400000 1000] tok=399660 gate=True viol=0/9 wall=1939.1s

@@ -1,0 +1,8 @@
+[cal procedural 500000] tok=499270 finish=stop accepted=True err=None
+[deepseek-v4.1-flash procedural 500000 1000] tok=499348 gate=True viol=0/9 wall=1285.9s
+[cal procedural 650000] tok=649364 finish=stop accepted=True err=None
+[deepseek-v4.1-flash procedural 650000 1000] tok=649442 gate=True viol=0/9 wall=1398.5s
+[cal procedural 800000] tok=799234 finish=stop accepted=True err=None
+[deepseek-v4.1-flash procedural 800000 1000] tok=799312 gate=True viol=0/9 wall=1492.4s
+[cal procedural 950000] tok=949036 finish=stop accepted=True err=None
+[deepseek-v4.1-flash procedural 950000 1000] tok=949114 gate=True viol=0/9 wall=2255.9s

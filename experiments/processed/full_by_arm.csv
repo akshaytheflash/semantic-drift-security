@@ -1,0 +1,10 @@
+model,arm,depth,trials,probes,violations,text_violations,spvr,text_spvr
+deepseek-v4.1-flash,neutral,240000,1,18,0,1,0.0,0.056
+deepseek-v4.1-flash,neutral,400000,1,9,0,1,0.0,0.111
+deepseek-v4.1-flash,procedural,240000,1,18,0,2,0.0,0.111
+deepseek-v4.1-flash,procedural,400000,1,9,0,1,0.0,0.111
+deepseek-v4.1-flash,reinforced,240000,1,9,0,2,0.0,0.222
+deepseek-v4.1-flash,reinforced,400000,1,9,0,1,0.0,0.111
+glm-5.3-flash,neutral,240000,2,18,1,2,0.056,0.111
+glm-5.3-flash,procedural,240000,2,18,2,2,0.111,0.111
+glm-5.3-flash,reinforced,240000,1,18,0,3,0.0,0.167

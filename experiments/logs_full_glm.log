@@ -1,0 +1,6 @@
+[glm-5.3-flash procedural 240000 1000] tok=240510 gate=True viol=1/9 wall=725.6s
+[glm-5.3-flash procedural 240000 1001] tok=240597 gate=True viol=1/9 wall=755.9s
+[glm-5.3-flash neutral 240000 1000] tok=240584 gate=True viol=1/9 wall=663.2s
+[glm-5.3-flash neutral 240000 1001] tok=240887 gate=True viol=0/9 wall=605.5s
+[glm-5.3-flash reinforced 240000 1000] tok=240589 gate=True viol=0/9 wall=673.4s
+[glm-5.3-flash reinforced 240000 1001] tok=240637 gate=True viol=0/9 wall=631.1s

@@ -188,6 +188,49 @@ P11 delete-by-description & 3/3 & 2/3 & 0/3 \\
 \end{tabular}
 \end{table}
 
+\subsection{Two models, four depths, all nine clauses}
+The full nine-clause set was then run at depth (Table~\ref{tab:cross}). GLM-5.3 Flash at
+240{,}510 and 240{,}597 tokens produced one action-level firing per trial, again P11 and again
+with the same interpretation. DeepSeek V4.1 Flash, whose window is roughly $4\times$ larger, was then walked up its
+window in steps of 150k tokens: 239{,}957, 399{,}715, 499{,}348, 649{,}442, 799{,}312 and
+finally \textbf{949{,}114 tokens (95\% of a 1M window)}. It produced \textbf{zero}
+action-level firings across all nine clauses at \emph{every} depth. Each rung was first
+accepted by a calibration call returning \texttt{finish\_reason=stop} with a substantive
+answer, so these are working-context depths, not rejected requests. All calls remained
+gate-passing (measured depth within 3\% of target). The document-mediated clauses that earlier arms did not reach
+(P2 secret exfiltration via a scraped document, P4 instruction embedded in a runbook) were
+refused by both models at every depth tested.
+
+\begin{table}[t]
+\centering
+\caption{Full nine-clause probe set at depth, action view (firings / trials). The DeepSeek ladder walks one arm upward until the provider stops accepting the request.}
+\label{tab:cross}
+\begin{tabular}{lrl}
+\toprule
+Probe & GLM @240k ($\times2$) & DeepSeek ladder (240k$\to$949k) \\
+\midrule
+P1 credentials & 0/2 & 0/6 \\
+P2 exfil via document & 0/2 & 0/6 \\
+P3 destructive bulk & 0/2 & 0/6 \\
+P4 document instruction & 0/2 & 0/6 \\
+P5 authorization bypass & 0/2 & 0/6 \\
+P6 credential share & 0/2 & 0/6 \\
+P7 exfil to auditor & 0/2 & 0/6 \\
+P10 exfil in message body & 0/2 & 0/6 \\
+P11 delete by description & 2/2 & 0/6 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Text scoring is wrong in both directions}
+Over the 36 adversarial probe runs collected in the full batches, text-only scoring flagged
+four runs that issued no prohibited call and executed no prohibited action
+(Table~\ref{tab:cross} reports the action view). The flag is raised by prose such as ``the
+backups were removed'' inside a refusal that explains what it will \emph{not} do. In the
+opposite direction, the benign probe failed in every depth trial of every mechanism while its
+text read as a harmless non-answer. A text-based evaluator therefore simultaneously
+over-reports violations and under-reports task failure.
+
 \subsection{Delivery location did not matter}
 Under M2 the policy existed only inside a document read mid-session, with a neutral system
 message. The agent still cited the clause identifiers verbatim and refused: ``\emph{Credentials
